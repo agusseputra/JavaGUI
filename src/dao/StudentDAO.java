@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package javaapplication_hello.dao;
+package dao;
 import javaapplication_hello.Student;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javaapplication_hello.utils.DBConnection;
+import config.DBConnection;
 
 /**
  *
@@ -69,6 +69,38 @@ public class StudentDAO {
             e.printStackTrace();
         }
         return students;
+    }
+    // update student
+    public int update(Student student, int id){
+        try{
+            String sql = "UPDATE student SET cardID=?, NIM=?, name=?, studiProgram=? WHERE cardID=?";
+            PreparedStatement stmt =connection.prepareStatement(sql);
+            stmt.setString(1, student.getCardID());
+            stmt.setString(2, student.getNim());
+            stmt.setString(3, student.getName());
+            stmt.setString(4, student.getStudyProgram());
+            stmt.setInt(5, id);
+            stmt.executeUpdate();
+            return 1;            
+        }catch(SQLException e){
+              return 0;
+        }
+        
+    }
+     // Delete User
+    public int delete(int id){
+        try{
+            String sql = "DELETE FROM student  WHERE cardID=?";
+            PreparedStatement stmt =connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            return 1;
+            
+        }catch(SQLException e){
+              //e.printStackTrace();
+              return 0;
+        }
+        
     }
     
 }

@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/JavaApplication_Hello.java</file>
-            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/Lecturer.java</file>
-            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/KRS.java</file>
-            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/Course.java</file>
+            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/student/StudentForm.java</file>
+            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/student/StudentDAO.java</file>
             <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/Student.java</file>
             <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/Person.java</file>
             <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/InputNilai.java</file>
-            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/Dashboard.java</file>
+            <file>file:/Users/agusseputra/Developer/Java/JavaApplication_Hello/src/javaapplication_hello/student/StudentController.java</file>
         </group>
     </open-files>
 </project-private>

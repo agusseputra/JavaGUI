@@ -4,6 +4,7 @@
  */
 package javaapplication_hello;
 import java.util.ArrayList;
+import controller.StudentController;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -26,12 +27,14 @@ public class InputNilai extends javax.swing.JFrame {
     Course selecttedCourse;
     KRS krs;
     Lecturer selectedLecture;
+    StudentController controller = new StudentController();
 
     public InputNilai() {
         initComponents();
-        listMahasiswa.add(new Student("199000299","Andi","001", "Ilmu Komputer"));
-        listMahasiswa.add(new Student("19920992","AGus Jaya","002", "Ilmu Komputer"));
-        listMahasiswa.add(new Student("19912992","Deni Mudia","003", "Ilmu Komputer"));
+        ArrayList<Student> listMahasiswa = (ArrayList<Student>) controller.getStudent();
+//        listMahasiswa.add(new Student("199000299","Andi","001", "Ilmu Komputer"));
+//        listMahasiswa.add(new Student("19920992","AGus Jaya","002", "Ilmu Komputer"));
+//        listMahasiswa.add(new Student("19912992","Deni Mudia","003", "Ilmu Komputer"));
         listMK.add(new Course("010", "OOP", 3, 2));
         listMK.add(new Course("011", "English", 3, 2));
         listMK.add(new Course("012", "Web", 3, 2));
@@ -343,9 +346,9 @@ public class InputNilai extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         pack();
