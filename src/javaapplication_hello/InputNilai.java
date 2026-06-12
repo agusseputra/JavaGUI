@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package javaapplication_hello;
+import model.Student;
 import java.util.ArrayList;
 import controller.StudentController;
 import javax.swing.ComboBoxModel;

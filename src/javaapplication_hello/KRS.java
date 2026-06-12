@@ -8,7 +8,7 @@ package javaapplication_hello;
  *
  * @author agusseputra
  */
-class KRS {
+public class KRS {
 
     private Course course;
     private double score;

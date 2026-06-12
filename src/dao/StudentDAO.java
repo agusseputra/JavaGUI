@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
-import javaapplication_hello.Student;
+import model.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -71,15 +71,14 @@ public class StudentDAO {
         return students;
     }
     // update student
-    public int update(Student student, int id){
+    public int update(Student student, String nim){
         try{
-            String sql = "UPDATE student SET cardID=?, NIM=?, name=?, studiProgram=? WHERE cardID=?";
+            String sql = "UPDATE students SET cardID=?,  name=?, studiProgram=? WHERE NIM=?";
             PreparedStatement stmt =connection.prepareStatement(sql);
             stmt.setString(1, student.getCardID());
-            stmt.setString(2, student.getNim());
-            stmt.setString(3, student.getName());
-            stmt.setString(4, student.getStudyProgram());
-            stmt.setInt(5, id);
+            stmt.setString(2, student.getName());
+            stmt.setString(3, student.getStudyProgram());
+            stmt.setString(4, nim);
             stmt.executeUpdate();
             return 1;            
         }catch(SQLException e){
@@ -88,11 +87,11 @@ public class StudentDAO {
         
     }
      // Delete User
-    public int delete(int id){
+    public int delete(String nim){
         try{
-            String sql = "DELETE FROM student  WHERE cardID=?";
+            String sql = "DELETE FROM students  WHERE NIM=?";
             PreparedStatement stmt =connection.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setString(1, nim);
             stmt.executeUpdate();
             return 1;
             

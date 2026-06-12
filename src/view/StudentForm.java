@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javaapplication_hello.Student;
+import model.Student;
 import controller.StudentController;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -23,7 +23,7 @@ public class StudentForm extends javax.swing.JFrame {
      * Creates new form StudentForm
      */
     //menampung id student untuk edit
-    private int selectedStudent;
+    private String selectedNIM ;
     StudentController controller = new StudentController();
     final String[] studyProgram={"Ilmu Komputer","Sistem Informasi","Teknologi Rekayasa PL"};
     final DefaultComboBoxModel comboModelProdi= new DefaultComboBoxModel(studyProgram);
@@ -60,13 +60,15 @@ public class StudentForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTextFieldNama = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldNIM = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jTextFieldNIK = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jComboBoxProdi = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jTextFieldNIM = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -84,7 +86,15 @@ public class StudentForm extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTableStudent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableStudentMouseClicked(evt);
@@ -99,15 +109,6 @@ public class StudentForm extends javax.swing.JFrame {
         jTextFieldNama.setText("Nama");
 
         jLabel2.setText("Nama");
-
-        jTextFieldNIM.setText("NIM");
-        jTextFieldNIM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNIMActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("NIM");
 
         jTextFieldNIK.setText("NIK");
 
@@ -124,6 +125,30 @@ public class StudentForm extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setForeground(new java.awt.Color(255, 0, 51));
+        jButton5.setText("Delete");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jTextFieldNIM.setText("NIM");
+        jTextFieldNIM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNIMActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("NIM");
+
+        jButton6.setText("Batal");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,21 +157,26 @@ public class StudentForm extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldNIM, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(jTextFieldNama)
-                    .addComponent(jTextFieldNIK))
-                .addGap(50, 50, 50)
+                    .addComponent(jTextFieldNama, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(jTextFieldNIK)
+                    .addComponent(jTextFieldNIM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxProdi, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +200,10 @@ public class StudentForm extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6))
                         .addGap(14, 14, 14))))
         );
 
@@ -186,35 +219,35 @@ public class StudentForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jLabel1)))
-                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addGap(205, 205, 205))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,30 +263,35 @@ public class StudentForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldNIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNIMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNIMActionPerformed
     private void clearForm(){
         jTextFieldNama.setText("");
-        jTextFieldNIM.setText("");
         jTextFieldNIK.setText("");
+        jTextFieldNIM.setText("");
+        jTextFieldNIM.setEditable(true);
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String name= jTextFieldNama.getText();
-        String NIM= jTextFieldNIM.getText();
         String cardID= jTextFieldNIK.getText();
+        String NIM= jTextFieldNIM.getText();
         String studyProgram= jComboBoxProdi.getSelectedItem().toString();
         
-        if(name.isEmpty() || NIM.isEmpty() || cardID.isEmpty() || studyProgram.isEmpty()){
+        if(name.isEmpty() || cardID.isEmpty() || studyProgram.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields ", "Input Error", JOptionPane.ERROR_MESSAGE);
         }else {
             Student student = new Student(cardID,name,NIM,studyProgram);
             try {
-                int res = controller.create(student);
+                //kenali apakah update atau data baru, bisa dilihat dari selectedNIM
+                int res;
+                if(selectedNIM != null){
+                    //jika selectedNIm tidak Null
+                    res = controller.update(student,selectedNIM);
+                }else{
+                    res = controller.create(student);
+                }
                 if (res == 1) {
                     JOptionPane.showMessageDialog(this, "User created successfully ", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    this.selectedNIM=null;
                     this.clearForm();
                     loadStudentData();
                 }else {
@@ -269,13 +307,46 @@ public class StudentForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectedRow =jTableStudent.getSelectedRow();
         if(selectedRow != -1){
-            selectedStudent = Integer.parseInt(jTableStudent.getValueAt(selectedRow, 0).toString());
+            jTextFieldNIM.setEditable(false);
+            selectedNIM = jTableStudent.getValueAt(selectedRow, 2).toString();
             jTextFieldNIK.setText(jTableStudent.getValueAt(selectedRow, 0).toString());
-//            jTextFieldNama.setText(jTableStudent.getValueAt(selectedRow, 1).toString());
-//            jTextFieldNIM.setText(jTableStudent.getValueAt(selectedRow, 2).toString());
-//            jComboBoxProdi.setSelectedItem(jTableStudent.getValueAt(selectedRow, 3).toString());
+            jTextFieldNama.setText(jTableStudent.getValueAt(selectedRow, 1).toString());
+            jTextFieldNIM.setText(jTableStudent.getValueAt(selectedRow, 2).toString());
+            jComboBoxProdi.setSelectedItem(jTableStudent.getValueAt(selectedRow, 3).toString());
         }
     }//GEN-LAST:event_jTableStudentMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(this,
+        "Are you sure you want to delete this student?",
+        "Delete Confirmation",
+        JOptionPane.YES_NO_OPTION
+            );
+
+            if(confirm == JOptionPane.YES_OPTION) {
+                // Proses delete
+                try {
+                    controller.delete(selectedNIM);
+                    JOptionPane.showMessageDialog(this,"Student deleted successfully!");
+                    this.selectedNIM=null;
+                    this.clearForm();
+                    loadStudentData();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StudentForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this,"deleted unsuccessfully!");
+                }
+            }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextFieldNIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNIMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNIMActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +392,8 @@ public class StudentForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBoxProdi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

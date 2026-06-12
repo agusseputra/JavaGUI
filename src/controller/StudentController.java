@@ -5,7 +5,7 @@
 package controller;
 
 import java.util.List;
-import javaapplication_hello.Student;
+import model.Student;
 import dao.StudentDAO;
 import dao.StudentDAO;
 
@@ -17,18 +17,19 @@ public class StudentController {
      private StudentDAO studentDAO = new StudentDAO();
 
     public int create(Student student) {
+        //logic adalah cek apakah user sudah login atau belum
         return studentDAO.create(student);
     }
 
     public List<Student> getStudent() {
         return studentDAO.getStudent();
     }
-    public int update(Student student, int id) {
-        return studentDAO.update(student, id);
+    public int update(Student student, String nim) {
+        return studentDAO.update(student, nim);
     }
 
-    public int delete(int id) {
-        return studentDAO.delete(id);
+    public int delete(String nim) {
+        return studentDAO.delete(nim);
     }
     
     
