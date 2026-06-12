@@ -4,6 +4,11 @@
  */
 package javaapplication_hello;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import view.StudentForm;
+
 /**
  *
  * @author agusseputra
@@ -93,7 +98,12 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            new StudentForm().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
